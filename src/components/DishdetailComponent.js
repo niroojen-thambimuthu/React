@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
 
 class Dishdetail extends Component {
@@ -15,13 +15,15 @@ class Dishdetail extends Component {
     renderDish(dish) {
         if (dish != null)
             return (
-                <Card>
-                    <CardImg top src={dish.image} alt={dish.name} />
-                    <CardBody>
-                        <CardTitle>{dish.name}</CardTitle>
-                        <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
+                <div className="col-12 col-md-5 m-1">
+                    <Card>
+                        <CardImg top src={dish.image} alt={dish.name} />
+                        <CardBody>
+                            <CardTitle>{dish.name}</CardTitle>
+                            <CardText>{dish.description}</CardText>
+                        </CardBody>
+                    </Card>
+                </div>
             );
         else
             return (
@@ -36,15 +38,18 @@ class Dishdetail extends Component {
                 return (
                     <li key={temp.id}>
                         <p>{temp.comment}</p>
-                        <p> -- {temp.author}, {temp.date} </p>
+                        <p> -- {temp.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(temp.date)))} </p>
                     </li>
                 );
             });
 
             return (
-                <ul className="list-unstyled">
-                    {commentTemp}
-                </ul>
+                <div className="col-12 col-md-5 m-1">
+                    <h4>Comments</h4>
+                    <ul className="list-unstyled">
+                        {commentTemp}
+                    </ul>
+                </div>
             );
         }
         else
@@ -55,21 +60,16 @@ class Dishdetail extends Component {
 
 
     render() {
-        
+
         // solution to typeerror null comments
         if (this.props.dish == null) {
             return (<div></div>)
         }
 
         return (
-            <div className="row">
-                {/* card dish details */}
-                <div className="col-12 col-md-5 m-1">
+            <div className="container">
+                <div className="row">
                     {this.renderDish(this.props.dish)}
-                </div>
-                {/* Comments section */}
-                <div className="col-12 col-md-5 m-1">
-                    <h4>Comments</h4>
                     {this.renderComments(this.props.dish.comments)}
                 </div>
             </div>
