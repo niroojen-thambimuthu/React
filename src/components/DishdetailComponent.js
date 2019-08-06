@@ -3,7 +3,7 @@ import {
     Card, CardImg, CardText, CardBody,
     CardTitle, Breadcrumb, BreadcrumbItem,
     Button, Modal, ModalHeader, ModalBody,
-    Form, FormGroup, Label, Input, Row, Col
+     Label, Row, Col
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
